@@ -1,6 +1,3 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import { createApp } from 'vue' // 1.import createApp from vue
 
-createApp(App).use(store).use(router).mount('#app')
+createApp(App).mount('#app')// 2.create app and mount it in div #app
