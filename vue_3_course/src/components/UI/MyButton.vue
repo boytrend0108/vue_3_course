@@ -1,3 +1,5 @@
+<!-- UI componenr button -->
+
 <template>
     <button class="btn">
         <slot></slot>

@@ -11,9 +11,7 @@
 </template>
 
 <script>
-
 export default {
-    components: { MyButton },
     props: {
         post: {
             type: Object,
