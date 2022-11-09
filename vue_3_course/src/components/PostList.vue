@@ -22,9 +22,5 @@ export default { // export props
 
 <!-- scoped - css apply in this component only -->
 <style scoped>
-.post {
-    padding: 15px;
-    border: 2px solid teal;
-    margin-top: 15px;
-}
+
 </style>

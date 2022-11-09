@@ -12,6 +12,7 @@ import PostForm from '@/components/PostForm.vue'
 import PostList from '@/components/PostList.vue'
 
 export default {// data and methods stay here couse they'll be used in diferent components
+
     components: {
         PostForm, PostList // add components to script
     },
@@ -26,6 +27,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
             // body: '',
         }
     },
+
     methods: {
         createPost(post) {// without post don't work push
             this.posts.push(post);

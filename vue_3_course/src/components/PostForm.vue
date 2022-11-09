@@ -5,12 +5,14 @@
         <!-- Add post.title instead of title -->
         <input v-model="post.title" type="text" class="input" placeholder="Title">
         <input v-model="post.body" type="text" class="input" placeholder="Discription">
-        <button class="btn" @click="createPost">Create post</button>
+        <my-button class="btn-pf" @click="createPost">Create post</my-button>
     </form>
 </template>
 
 <script>
+import MyButton from '@/components/UI/MyButton.vue';
 export default {
+    components: { MyButton },
     data() {
         return {
             post: {
@@ -40,16 +42,6 @@ export default {
     flex-direction: column;
 }
 
-.btn {
-    align-self: flex-end;
-    margin-top: 10px;
-    padding: 10px 15px;
-    background: teal;
-    color: white;
-    border: 1px solid teal;
-    cursor: pointer;
-}
-
 .post {
     padding: 15px;
     border: 2px solid teal;
@@ -61,5 +53,10 @@ export default {
     border: 1px solid teal;
     padding: 15px;
     margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-pf {
+    align-self: flex-end;
 }
 </style>
