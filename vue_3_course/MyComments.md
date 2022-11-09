@@ -4,4 +4,4 @@ https://zawindows.ru/%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%
 1. npm install -g @vue/cli (admin mode)
 2.vue cruate . (create Vue app in this dir)
 3.npm run serve
-4.
+4. Create file App.vue in src
