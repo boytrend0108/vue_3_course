@@ -1,13 +1,15 @@
 <!--This component  post posts -->
 <template>
-    <div class="post" v-for="post in posts">
-        <div><strong>Title:</strong> {{ post.title }}</div>
-        <div><strong>Description:</strong> {{ post.body }}</div>
+    <div>
+        <h2>Users List</h2>
+        <post-item v-for="post in posts" :post="post" />
     </div>
 </template>
 
 <script>
+import PostItem from "@/components/PostItem";
 export default { // export props
+    components: { PostItem },
     props: {
         posts: {
             type: Array,
