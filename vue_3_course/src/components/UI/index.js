@@ -2,6 +2,6 @@
 
 import MyButton from '@/components/UI/MyButton'
 
-export default [
+export default [// here ARRAY
     MyButton
 ]
