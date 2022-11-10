@@ -3,8 +3,8 @@
     <form class="form" @submit.prevent.default>
         <h2>New post</h2>
         <!-- Add post.title instead of title -->
-        <input v-model="post.title" type="text" class="input" placeholder="Title">
-        <input v-model="post.body" type="text" class="input" placeholder="Discription">
+        <my-input v-model="post.title" type="text" placeholder="Title" />
+        <my-input v-model="post.body" type="text" placeholder="Discription" />
         <my-button class="btn-pf" @click="createPost">Create post</my-button>
     </form>
 </template>
@@ -44,13 +44,7 @@ export default {
     margin-top: 15px;
 }
 
-.input {
-    width: 100%;
-    border: 1px solid teal;
-    padding: 15px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
+
 
 .btn-pf {
     align-self: flex-end;
