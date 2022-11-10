@@ -2,8 +2,8 @@
     <div class="app">
         <!--Add component to html-->
         <h1>Post page</h1>
-        <input type="text" v-model.trim="modificatorValue">
         <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
+        <!--v-model connect show in MyDialog with dialogVisible in this page-->
         <my-dialog v-model:show="dialogVisible">
             <post-form @create="createPost" />
         </my-dialog>
@@ -29,7 +29,6 @@ export default {// data and methods stay here couse they'll be used in diferent 
                 { id: 3, title: "JavaScript 3", body: "Discription of JavaScript 3" }
             ],
             dialogVisible: false,
-            modificatorValue: ''
         }
     },
 
