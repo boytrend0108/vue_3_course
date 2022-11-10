@@ -6,10 +6,10 @@
 export default {
     name: 'my-input',
     props: {
-        modelValue: [String, Number]
+        modelValue: [String, Number]// get value from our input(modelValue for Vue3)
     },
     methods: {
-        updateInput(event) {
+        updateInput(event) {//use this method 
             this.$emit('update:modelValue', event.target.value)
         }
     }

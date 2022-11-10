@@ -2,7 +2,7 @@
     <div class="app">
         <!--Add component to html-->
         <post-form @create="createPost" />
-        <post-list :posts="posts" />
+        <post-list :posts="posts" @remove='removePost' />
     </div>
 </template>
 
@@ -31,6 +31,9 @@ export default {// data and methods stay here couse they'll be used in diferent 
     methods: {
         createPost(post) {// without post don't work push
             this.posts.push(post);
+        },
+        removePost(post) {
+            this.posts = this.posts.filter(p => p.id !== post.id);
         }
     }
 }
