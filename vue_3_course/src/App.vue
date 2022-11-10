@@ -6,6 +6,7 @@
         <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
         <!--v-model connect show in MyDialog with dialogVisible in this page-->
         <my-dialog v-model:show="dialogVisible">
+            <!--This use slot-->
             <post-form @create="createPost" />
         </my-dialog>
         <post-list :posts="posts" @remove='removePost' v-if="!isPostLoading" />
