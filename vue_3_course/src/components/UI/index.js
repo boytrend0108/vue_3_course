@@ -3,10 +3,13 @@
 import MyButton from '@/components/UI/MyButton'
 import Myinput from "@/components/UI/MyInput"
 import MyDialog from "@/components/UI/MyDialog"
+import MyPreloader from "@/components/UI/MyPreloader"
 
 
 export default [// here ARRAY
     MyButton,
     Myinput,
-    MyDialog
+    MyDialog,
+    MyPreloader
+
 ]
