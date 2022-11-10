@@ -1,7 +1,12 @@
 <template>
     <div class="app">
         <!--Add component to html-->
-        <post-form @create="createPost" />
+        <h1>Post page</h1>
+        <input type="text" v-model.trim="modificatorValue">
+        <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
+        <my-dialog v-model:show="dialogVisible">
+            <post-form @create="createPost" />
+        </my-dialog>
         <post-list :posts="posts" @remove='removePost' />
     </div>
 </template>
@@ -23,15 +28,21 @@ export default {// data and methods stay here couse they'll be used in diferent 
                 { id: 2, title: "JavaScript 2", body: "Discription of JavaScript 2" },
                 { id: 3, title: "JavaScript 3", body: "Discription of JavaScript 3" }
             ],
+            dialogVisible: false,
+            modificatorValue: ''
         }
     },
 
     methods: {
         createPost(post) {// without post don't work push
             this.posts.push(post);
+            this.dialogVisible = false; //hide dialog window 
         },
         removePost(post) {
             this.posts = this.posts.filter(p => p.id !== post.id);
+        },
+        showDialog() {
+            this.dialogVisible = true;
         }
     }
 }
