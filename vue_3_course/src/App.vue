@@ -23,8 +23,6 @@ export default {// data and methods stay here couse they'll be used in diferent 
                 { id: 2, title: "JavaScript 2", body: "Discription of JavaScript 2" },
                 { id: 3, title: "JavaScript 3", body: "Discription of JavaScript 3" }
             ],
-            // title: '', - this is in PostForm
-            // body: '',
         }
     },
 

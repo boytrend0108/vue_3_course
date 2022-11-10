@@ -13,7 +13,7 @@
 export default {
     data() {
         return {
-            post: {
+            post: {// our post as object
                 title: '',
                 body: ''
             }
