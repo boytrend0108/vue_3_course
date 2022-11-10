@@ -2,12 +2,14 @@
     <div class="app">
         <!--Add component to html-->
         <h1>Post page</h1>
+        <!-- <my-button @click="fetchPosts" style="margin-right: 10px;">Get posts</my-button> -->
         <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
         <!--v-model connect show in MyDialog with dialogVisible in this page-->
         <my-dialog v-model:show="dialogVisible">
             <post-form @create="createPost" />
         </my-dialog>
-        <post-list :posts="posts" @remove='removePost' />
+        <post-list :posts="posts" @remove='removePost' v-if="!isPostLoading" />
+        <div v-else>Downloading...</div>
     </div>
 </template>
 
@@ -15,6 +17,7 @@
 // @- allias thet refers tu src
 import PostForm from '@/components/PostForm.vue'
 import PostList from '@/components/PostList.vue'
+import axios from 'axios'
 
 export default {// data and methods stay here couse they'll be used in diferent components
 
@@ -23,12 +26,9 @@ export default {// data and methods stay here couse they'll be used in diferent 
     },
     data() {
         return {
-            posts: [
-                { id: 1, title: "JavaScript", body: "Discription of JavaScript" },
-                { id: 2, title: "JavaScript 2", body: "Discription of JavaScript 2" },
-                { id: 3, title: "JavaScript 3", body: "Discription of JavaScript 3" }
-            ],
+            posts: [],
             dialogVisible: false,
+            isPostLoading: false
         }
     },
 
@@ -42,7 +42,22 @@ export default {// data and methods stay here couse they'll be used in diferent 
         },
         showDialog() {
             this.dialogVisible = true;
+        },
+        async fetchPosts() {
+            try {
+                this.isPostLoading = true;//appeare inscription 'Downloading...'
+                const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+                this.posts = response.data;
+
+            } catch (err) {
+                alert(err)
+            } finally {
+                this.isPostLoading = false;//disappeare inscription 'Downloading...'    
+            }
         }
+    },
+    mounted() {
+        this.fetchPosts();//download post from server
     }
 }
 </script>
