@@ -40,7 +40,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
             selectedSort: '',
             sortOptions: [
                 { value: 'title', name: '- by name' },
-                { value: 'body', name: '- by description' }
+                { value: 'body', name: '- by description' },
             ]
         }
     },
@@ -75,8 +75,10 @@ export default {// data and methods stay here couse they'll be used in diferent 
     // watch ia object
     watch: {// function watch must have the same name as model, that anounced in component
         selectedSort(newValue) {// this func sort post by name or decription
+
             this.posts.sort((post1, post2) => {
                 // this selectedSort is 'title ' or 'body'. We compare title1 and title2 or body
+                //!!!! localeCompere don't work for id
                 return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
             })
         },

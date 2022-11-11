@@ -10,20 +10,18 @@
 </template>
 
 <script>
-import { handleError } from 'vue';
-
 export default {
     data() {
         return {
             post: {// our post as object
                 title: '',
-                body: ''
+                body: '',
             }
         }
     },
     methods: {
         createPost() {
-            this.post.id = Date.now(); // add post.id (current date)
+            this.post.index = String(Date.now()); // add post.id (current date)
             this.$emit('create', this.post)
             this.post = {
                 title: '',// clear input
