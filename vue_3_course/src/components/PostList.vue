@@ -2,8 +2,11 @@
 <template>
     <div v-show="posts.length > 0">
         <h2>Posts List</h2>
-        <post-item v-for="post in posts" :post="post" :key="post.id" @remove="$emit('remove', post)">
-        </post-item>
+        <!--transition-group for animation-->
+        <transition-group name="post-list">
+            <post-item v-for="post in posts" :post="post" :key="post.id" @remove="$emit('remove', post)">
+            </post-item>
+        </transition-group>
     </div>
     <h2 v-show="posts.length === 0" style="color: red">Posts list is empty</h2>
 </template>
@@ -24,5 +27,23 @@ export default { // export props
 
 <!-- scoped - css apply in this component only -->
 <style scoped>
+.post-list-item {
+    display: inline-block;
+    margin-right: 10px;
+}
 
+.post-list-enter-active,
+.post-list-leave-active {
+    transition: all 0.5s ease;
+}
+
+post-listt-enter-from,
+.post-list-leave-to {
+    opacity: 0;
+    transform: translateX(130px);
+}
+
+.post-list-move {
+    transition: transform 0.8s ease;
+}
 </style>

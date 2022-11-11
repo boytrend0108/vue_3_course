@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         createPost() {
-            this.post.index = String(Date.now()); // add post.id (current date)
+            this.post.id = Date.now(); // add post.id (current date)
             this.$emit('create', this.post)
             this.post = {
                 title: '',// clear input

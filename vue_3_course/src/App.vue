@@ -59,7 +59,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
         async fetchPosts() {
             try {
                 this.isPostLoading = true;//appeare inscription 'Downloading...'
-                const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+                const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=3');
                 this.posts = response.data;
             } catch (err) {
                 alert(err)
