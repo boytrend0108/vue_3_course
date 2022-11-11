@@ -2,6 +2,7 @@
     <div class="app">
         <!--Add component to html-->
         <h1>Post page</h1>
+        <input v-model="searchQuery" type="text" placeholder="Seach...">
         <div class="app__bnts">
             <!-- <my-button @click="fetchPosts" style="margin-right: 10px;">Get posts</my-button> -->
             <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
@@ -13,7 +14,7 @@
             <!--This use slot-->
             <post-form @create="createPost" />
         </my-dialog>
-        <post-list :posts="sortedPosts" @remove='removePost' v-if="!isPostLoading" />
+        <post-list :posts="sortedAndSearchedPost" @remove='removePost' v-if="!isPostLoading" />
         <!--Preloader-->
         <my-preloader class="loader" v-show="isPostLoading">loading</my-preloader>
     </div>
@@ -41,7 +42,8 @@ export default {// data and methods stay here couse they'll be used in diferent 
             sortOptions: [
                 { value: 'title', name: '- by name' },
                 { value: 'body', name: '- by description' },
-            ]
+            ],
+            searchQuery: ''
         }
     },
 
@@ -70,14 +72,18 @@ export default {// data and methods stay here couse they'll be used in diferent 
     },
     mounted() {
         this.fetchPosts();//download post from server
+
     },
-    computed: {
+    computed: {//!!!!All computed function we can use as variable!!!(without ())
         sortedPosts() {// sort posts
             // we deploy new array
             return [...this.posts]
                 .sort((post1, post2) => post1[this.selectedSort]
                     ?.localeCompare(post2[this.selectedSort]))
         },
+        sortedAndSearchedPost() {// filter posts
+            return this.sortedPosts.filter(post => post.title.includes(this.searchQuery))
+        }
     },
     // // watch is an object
     // watch: {// functions in watch must have the same name as model, that anounced in component

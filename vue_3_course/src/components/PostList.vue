@@ -19,7 +19,8 @@ export default { // export props
         posts: {
             type: Array,
             requierd: true
-        }
+        },
+
     }
 }
 
