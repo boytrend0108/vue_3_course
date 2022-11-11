@@ -2,7 +2,7 @@
     <div class="app">
         <!--Add component to html-->
         <h1>Post page</h1>
-        <input v-model="searchQuery" type="text" placeholder="Seach...">
+        <my-input v-model="searchQuery" placeholder="Seach..." />
         <div class="app__bnts">
             <!-- <my-button @click="fetchPosts" style="margin-right: 10px;">Get posts</my-button> -->
             <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
@@ -82,7 +82,8 @@ export default {// data and methods stay here couse they'll be used in diferent 
                     ?.localeCompare(post2[this.selectedSort]))
         },
         sortedAndSearchedPost() {// filter posts
-            return this.sortedPosts.filter(post => post.title.includes(this.searchQuery))
+            return this.sortedPosts.filter(post =>
+                post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
         }
     },
     // // watch is an object
@@ -107,6 +108,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
 
 .app {
     padding: 20px;
+    width: 100%
 }
 
 .app__bnts {
