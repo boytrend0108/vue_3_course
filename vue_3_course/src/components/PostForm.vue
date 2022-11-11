@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import { handleError } from 'vue';
+
 export default {
     data() {
         return {
@@ -28,7 +30,16 @@ export default {
                 body: '',
             }
         }
-    }
+    },
+    //-----for array and object we have to use deep object tracking !!!!!!!
+    // watch: {
+    //     post: {
+    //         handler(newValue) {
+    //             console.log(newValue);
+    //         },
+    //         deep: true // enable deep tracking
+    //     }
+    // }
 }
 </script>
 

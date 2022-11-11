@@ -2,8 +2,12 @@
     <div class="app">
         <!--Add component to html-->
         <h1>Post page</h1>
-        <!-- <my-button @click="fetchPosts" style="margin-right: 10px;">Get posts</my-button> -->
-        <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
+        <div class="app__bnts">
+            <!-- <my-button @click="fetchPosts" style="margin-right: 10px;">Get posts</my-button> -->
+            <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
+            <my-select v-model="selectedSort" :options="sortOptions"></my-select>
+        </div>
+
         <!--v-model connect show in MyDialog with dialogVisible in this page-->
         <my-dialog v-model:show="dialogVisible">
             <!--This use slot-->
@@ -32,7 +36,12 @@ export default {// data and methods stay here couse they'll be used in diferent 
         return {
             posts: [],
             dialogVisible: false,
-            isPostLoading: false
+            isPostLoading: false,
+            selectedSort: '',
+            sortOptions: [
+                { value: 'title', name: '- by name' },
+                { value: 'body', name: '- by description' }
+            ]
         }
     },
 
@@ -61,6 +70,17 @@ export default {// data and methods stay here couse they'll be used in diferent 
     },
     mounted() {
         this.fetchPosts();//download post from server
+    },
+
+    // watch ia object
+    watch: {// function watch must have the same name as model, that anounced in component
+        selectedSort(newValue) {// this func sort post by name or decription
+            this.posts.sort((post1, post2) => {
+                // this selectedSort is 'title ' or 'body'. We compare title1 and title2 or body
+                return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
+            })
+        },
+
     }
 }
 </script>
@@ -74,5 +94,12 @@ export default {// data and methods stay here couse they'll be used in diferent 
 
 .app {
     padding: 20px;
+}
+
+.app__bnts {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    align-items: center;
 }
 </style>
