@@ -38,7 +38,7 @@ export default { // export props
     transition: all 0.5s ease;
 }
 
-post-listt-enter-from,
+.post-list-enter-from,
 .post-list-leave-to {
     opacity: 0;
     transform: translateX(130px);

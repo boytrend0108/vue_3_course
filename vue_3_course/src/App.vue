@@ -8,13 +8,27 @@
             <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
             <my-select v-model="selectedSort" :options="sortOptions"></my-select>
         </div>
-
         <!--v-model connect show in MyDialog with dialogVisible in this page-->
         <my-dialog v-model:show="dialogVisible">
             <!--This use slot-->
             <post-form @create="createPost" />
         </my-dialog>
         <post-list :posts="sortedAndSearchedPost" @remove='removePost' v-if="!isPostLoading" />
+        <!--Page rendering-->
+        <div class="page__wrapper">
+            
+            <!--this is iterate over number "v-for="pageNumber in totalPage""-->
+            <!--We also can bild class ":class="{ current__page: true }"-->
+            <div 
+              class="page" 
+              v-for="pageNumber in totalPage" 
+              :key="pageNumber"
+              :class="{ current__page: page === pageNumber }"
+              @click="changePage(pageNumber)"><!--page === pageNumber- is Boolean-->
+            {{ pageNumber }}
+            </div>
+
+        </div>
         <!--Preloader-->
         <my-preloader class="loader" v-show="isPostLoading">loading</my-preloader>
     </div>
@@ -35,21 +49,26 @@ export default {// data and methods stay here couse they'll be used in diferent 
     },
     data() {
         return {
-            posts: [],
+            posts: [],// array for our posts
             dialogVisible: false,
             isPostLoading: false,
             selectedSort: '',
-            sortOptions: [
+            sortOptions: [// array for dropdown list(MySelect)
                 { value: 'title', name: '- by name' },
                 { value: 'body', name: '- by description' },
             ],
-            searchQuery: ''
+            searchQuery: '',
+            //-----for page rendering
+            page: 1,// number of page that we wi'll render
+            limit: 5,// limit of posts on this page
+            totalPage: 0// we calculate this below (for pagination on )
+            //-------
         }
     },
 
     methods: {
         createPost(post) {// without post don't work push
-            this.posts.push(post);
+            this.posts.unshift(post);
             this.dialogVisible = false; //hide dialog window 
         },
         removePost(post) {
@@ -61,13 +80,24 @@ export default {// data and methods stay here couse they'll be used in diferent 
         async fetchPosts() {
             try {
                 this.isPostLoading = true;//appeare inscription 'Downloading...'
-                const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=3');
+                const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+                    params: { //-----for page rendering ...typicode.com/posts&_page=10&_limit= 5
+                        _limit: this.limit, // show "this.limit" posts per page and ...
+                        _page: this.page,// download page number "this.page"
+                    }
+                });
+                // headers['x-total-count']  we lock in devtools -> Network -> headers
+                this.totalPage = Math.ceil(response.headers['x-total-count'] / this.limit) //-----for page rendering
                 this.posts = response.data;
             } catch (err) {
                 alert(err)
             } finally {
                 this.isPostLoading = false;//disappeare inscription 'Downloading...'    
             }
+        },
+        changePage(pageNumber){
+            this.page= pageNumber;
+            this.fetchPosts();// get new page
         }
     },
     mounted() {
@@ -99,7 +129,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
 }
 </script>
 
-<style>
+<style scoped>
 * {
     margin: 0;
     padding: 0;
@@ -116,5 +146,27 @@ export default {// data and methods stay here couse they'll be used in diferent 
     justify-content: space-between;
     margin: 15px 0;
     align-items: center;
+}
+.page__wrapper {
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.page {
+    border: 1px solid teal;
+    padding: 3px;
+    cursor: pointer;
+    width: 30px;
+    text-align: center;
+
+}
+
+.current__page {
+    border: 2px solid teal;
+    color: white;
+    background: teal;
+
 }
 </style>
