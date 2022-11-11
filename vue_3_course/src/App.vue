@@ -13,7 +13,7 @@
             <!--This use slot-->
             <post-form @create="createPost" />
         </my-dialog>
-        <post-list :posts="posts" @remove='removePost' v-if="!isPostLoading" />
+        <post-list :posts="sortedPosts" @remove='removePost' v-if="!isPostLoading" />
         <!--Preloader-->
         <my-preloader class="loader" v-show="isPostLoading">loading</my-preloader>
     </div>
@@ -71,19 +71,24 @@ export default {// data and methods stay here couse they'll be used in diferent 
     mounted() {
         this.fetchPosts();//download post from server
     },
-
-    // watch ia object
-    watch: {// function watch must have the same name as model, that anounced in component
-        selectedSort(newValue) {// this func sort post by name or decription
-
-            this.posts.sort((post1, post2) => {
-                // this selectedSort is 'title ' or 'body'. We compare title1 and title2 or body
-                //!!!! localeCompere don't work for id
-                return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
-            })
+    computed: {
+        sortedPosts() {// sort posts
+            // we deploy new array
+            return [...this.posts]
+                .sort((post1, post2) => post1[this.selectedSort]
+                    ?.localeCompare(post2[this.selectedSort]))
         },
-
-    }
+    },
+    // // watch is an object
+    // watch: {// functions in watch must have the same name as model, that anounced in component
+    //     selectedSort(newValue) {// this func sort post by name or decription
+    //         this.posts.sort((post1, post2) => {
+    //             // this selectedSort is 'title ' or 'body'. We compare title1 and title2 or body
+    //             //!!!! localeCompere don't work for id
+    //             return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
+    //         })
+    //     },
+    // }
 }
 </script>
 
