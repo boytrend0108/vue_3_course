@@ -23,7 +23,7 @@
 // @- allias thet refers tu src
 import PostForm from '@/components/PostForm.vue'
 import PostList from '@/components/PostList.vue'
-import axios from 'axios'
+import axios from 'axios'// for API
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
