@@ -15,7 +15,7 @@
         </my-dialog>
         <post-list :posts="sortedAndSearchedPost" @remove='removePost' v-if="!isPostLoading" />
         <!--Page rendering-->
-         <my-pagination :page="page" :totalPage="totalPage" @changePage="changePage"/>
+        <my-pagination :page="page" :totalPage="totalPage" @changePage="changePage" />
         <!--Preloader-->
         <my-preloader class="loader" v-show="isPostLoading">loading</my-preloader>
     </div>
