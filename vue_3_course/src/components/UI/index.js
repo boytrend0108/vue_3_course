@@ -5,6 +5,7 @@ import Myinput from "@/components/UI/MyInput"
 import MyDialog from "@/components/UI/MyDialog"
 import MyPreloader from "@/components/UI/MyPreloader"
 import MySelect from '@/components/UI/MySelect'
+import MyPagination from '@/components/UI/MyPagination'
 
 
 export default [// here ARRAY
@@ -12,6 +13,6 @@ export default [// here ARRAY
     Myinput,
     MyDialog,
     MyPreloader,
-    MySelect
-
+    MySelect,
+    MyPagination
 ]
