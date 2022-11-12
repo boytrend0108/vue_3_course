@@ -113,6 +113,14 @@ export default {// data and methods stay here couse they'll be used in diferent 
     //         })
     //     },
     // }
+
+    watch: {
+        page() {
+            this.fetchPosts();
+        }
+
+    }
+
 }
 </script>
 
