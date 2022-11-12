@@ -15,20 +15,7 @@
         </my-dialog>
         <post-list :posts="sortedAndSearchedPost" @remove='removePost' v-if="!isPostLoading" />
         <!--Page rendering-->
-        <div class="page__wrapper">
-            
-            <!--this is iterate over number "v-for="pageNumber in totalPage""-->
-            <!--We also can bild class ":class="{ current__page: true }"-->
-            <div 
-              class="page" 
-              v-for="pageNumber in totalPage" 
-              :key="pageNumber"
-              :class="{ current__page: page === pageNumber }"
-              @click="changePage(pageNumber)"><!--page === pageNumber- is Boolean-->
-            {{ pageNumber }}
-            </div>
-
-        </div>
+         <my-pagination :page="page" :totalPage="totalPage" @changePage="changePage"/>
         <!--Preloader-->
         <my-preloader class="loader" v-show="isPostLoading">loading</my-preloader>
     </div>
@@ -95,8 +82,8 @@ export default {// data and methods stay here couse they'll be used in diferent 
                 this.isPostLoading = false;//disappeare inscription 'Downloading...'    
             }
         },
-        changePage(pageNumber){
-            this.page= pageNumber;
+        changePage(pageNumber) {
+            this.page = pageNumber;
             this.fetchPosts();// get new page
         }
     },
@@ -146,27 +133,5 @@ export default {// data and methods stay here couse they'll be used in diferent 
     justify-content: space-between;
     margin: 15px 0;
     align-items: center;
-}
-.page__wrapper {
-    display: flex;
-    margin-top: 15px;
-    align-items: center;
-    justify-content: center;
-}
-
-.page {
-    border: 1px solid teal;
-    padding: 3px;
-    cursor: pointer;
-    width: 30px;
-    text-align: center;
-
-}
-
-.current__page {
-    border: 2px solid teal;
-    color: white;
-    background: teal;
-
 }
 </style>

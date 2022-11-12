@@ -4,8 +4,7 @@
         <h2>Posts List</h2>
         <!--transition-group for animation-->
         <transition-group name="post-list">
-            <post-item v-for="post in posts" :post="post" :key="post.id" @remove="$emit('remove', post)">
-            </post-item>
+            <post-item v-for="post in posts" :post="post" :key="post.id" @remove="$emit('remove', post)"></post-item>
         </transition-group>
     </div>
     <h2 v-show="posts.length === 0" style="color: red">Posts list is empty</h2>
