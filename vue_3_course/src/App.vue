@@ -14,11 +14,10 @@
             <post-form @create="createPost" />
         </my-dialog>
         <post-list :posts="sortedAndSearchedPost" @remove='removePost' v-if="!isPostLoading" />
-        <!--Page rendering-->
-        <my-pagination :page="page" :totalPage="totalPage" @changePage="changePage" />
         <!--Preloader-->
         <my-preloader class="loader" v-show="isPostLoading">loading</my-preloader>
     </div>
+        <div ref="observer" class="observer"></div><!--(000)ref we use to get access to DOM element--> 
 </template>
 
 <script>
@@ -82,14 +81,51 @@ export default {// data and methods stay here couse they'll be used in diferent 
                 this.isPostLoading = false;//disappeare inscription 'Downloading...'    
             }
         },
-        changePage(pageNumber) {
-            this.page = pageNumber;
-            this.fetchPosts();// get new page
-        }
+        async loadMorePosts() {
+            try {
+                this.page += 1; // увеличиваем страницу на ед.
+                console.log(this.page)
+                // this.isPostLoading = true;//appeare inscription 'Downloading...'
+                const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+                    params: { //-----for page rendering ...typicode.com/posts&_page=10&_limit= 5
+                        _limit: this.limit, // show "this.limit" posts per page and ...
+                        _page: this.page,// download page number "this.page"
+                    }
+                });
+                // headers['x-total-count']  we lock in devtools -> Network -> headers
+                this.totalPage = Math.ceil(response.headers['x-total-count'] / this.limit) //-----for page rendering
+                this.posts = [...this.posts, ...response.data]// to exsisting posts add new posts
+            } catch (err) {
+                alert(err)
+            } finally {
+                // this.isPostLoading = false;//disappeare inscription 'Downloading...'    
+            }
+        },
+
     },
     mounted() {
         this.fetchPosts();//download post from server
 
+        // (000)this for intersection observer------------------
+        // console.log(this.$refs.observer)// div за которым мы наблюдаем
+        // Create watcher-object
+        let options = {
+            // root: null, // default
+            rootMargin: '0px',
+            threshold: 0.25
+          }
+          const callback = (entries, observer)=>{ 
+            // if intersection true and it is't last page  
+         if (entries[0].isIntersecting && this.page <= this.totalPage){
+            console.log('666')
+            this.loadMorePosts();
+         }
+          }
+        let observer = new IntersectionObserver(callback, options);// watcn for whole page
+    
+        //
+        observer.observe(this.$refs.observer);// target el 
+        
     },
     computed: {//!!!!All computed function we can use as variable!!!(without ())
         sortedPosts() {// sort posts
@@ -103,23 +139,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
                 post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
         }
     },
-    // // watch is an object
-    // watch: {// functions in watch must have the same name as model, that anounced in component
-    //     selectedSort(newValue) {// this func sort post by name or decription
-    //         this.posts.sort((post1, post2) => {
-    //             // this selectedSort is 'title ' or 'body'. We compare title1 and title2 or body
-    //             //!!!! localeCompere don't work for id
-    //             return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
-    //         })
-    //     },
-    // }
 
-    watch: {
-        page() {
-            this.fetchPosts();
-        }
-
-    }
 
 }
 </script>
@@ -141,5 +161,9 @@ export default {// data and methods stay here couse they'll be used in diferent 
     justify-content: space-between;
     margin: 15px 0;
     align-items: center;
+}
+.observer {
+    height: 60px;
+    background-color: aqua;
 }
 </style>
