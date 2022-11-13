@@ -1,13 +1,18 @@
 <template>
     <div class="post">
         <div>
-            <div>{{post.id}}</div>
+            <div>{{ post.id }}</div>
             <div><strong>Title:</strong> {{ post.title }}</div>
             <div><strong>Description:</strong> {{ post.body }}</div>
+        </div>
+        <div style="margin-right: 10px;">
+            <!-- to insert ${post.id} use `` not '' -->
+            <my-button @click="$router.push(`posts/${post.id}`)">Open</my-button>
         </div>
         <div>
             <my-button @click="$emit('remove', post)">Delete</my-button>
         </div>
+
     </div>
 </template>
 
@@ -18,7 +23,7 @@ export default {
             type: Object,
             required: true
         }
-    }
+    },
 }
 </script>
 
