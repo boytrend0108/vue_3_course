@@ -1,5 +1,6 @@
 import { createApp } from 'vue' // 1.import createApp from vue
 import App from './App' //3.Import comp App.vue
+import router from './router/router';
 const app = createApp(App);
 
 //---Global registration UI 
@@ -9,4 +10,6 @@ components.forEach(component => {
 }
 )
 
-app.mount('#app')// 2.create app and mount it in div #app
+app
+    .use(router)
+    .mount('#app')// 2.create app and mount it in div #app

@@ -19,8 +19,8 @@ export default { // export props
             type: Array,
             requierd: true
         },
-
-    }
+    },
+    emits: ['remove']
 }
 
 </script>
