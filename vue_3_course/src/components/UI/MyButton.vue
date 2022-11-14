@@ -1,7 +1,7 @@
 <!-- UI componenr button -->
 
 <template>
-    <button class="btn">
+    <button v-focus class="btn">
         <slot></slot>
     </button>
 </template>

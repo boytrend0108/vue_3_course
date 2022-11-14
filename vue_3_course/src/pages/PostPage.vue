@@ -17,7 +17,7 @@
         <!--Preloader-->
         <my-preloader class="loader" v-show="isPostLoading">loading</my-preloader>
     </div>
-    <div ref="observer" class="observer"></div>
+    <div v-intersection="loadMorePosts" class="observer"></div>
     <!--(000)ref we use to get access to DOM element-->
 </template>
 
@@ -103,26 +103,9 @@ export default {// data and methods stay here couse they'll be used in diferent 
 
     },
     mounted() {
-        this.fetchPosts();//download post from server
+        // this.fetchPosts();//download post from server
 
-        // (000)this for intersection observer------------------
-        // console.log(this.$refs.observer)// div за которым мы наблюдаем
-        // Create watcher-object
-        let options = {
-            // root: null, // default
-            rootMargin: '0px',
-            threshold: 0.25
-        }
-        const callback = (entries, observer) => {
-            // if intersection true and it is't last page  
-            if (entries[0].isIntersecting && this.page <= this.totalPage) {
-                this.loadMorePosts();
-            }
-        }
-        let observer = new IntersectionObserver(callback, options);// watcn for whole page
 
-        //
-        observer.observe(this.$refs.observer);// target el 
 
     },
     computed: {//!!!!All computed function we can use as variable!!!(without ())
