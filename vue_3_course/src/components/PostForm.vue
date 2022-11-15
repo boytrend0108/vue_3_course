@@ -3,7 +3,7 @@
     <form class="form" @submit.prevent.default>
         <h2>New post</h2>
         <!-- Add post.title instead of title -->
-        <my-input v-model="post.title" type="text" placeholder="Title" />
+        <my-input v-focus v-model="post.title" type="text" placeholder="Title" />
         <my-input v-model="post.body" type="text" placeholder="Discription" />
         <my-button class="btn-pf" @click="createPost">Create post</my-button>
     </form>
@@ -29,6 +29,7 @@ export default {
             }
         }
     },
+
     //-----for array and object we have to use deep object tracking !!!!!!!
     // watch: {
     //     post: {

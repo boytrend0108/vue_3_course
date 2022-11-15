@@ -2,7 +2,7 @@
     <div>
         <!--Add component to html-->
         <h1>Post page</h1>
-        <my-input v-model="searchQuery" placeholder="Seach..." />
+        <my-input v-focus v-model="searchQuery" placeholder="Seach..." />
         <div class="app__bnts">
             <!-- <my-button @click="fetchPosts" style="margin-right: 10px;">Get posts</my-button> -->
             <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>

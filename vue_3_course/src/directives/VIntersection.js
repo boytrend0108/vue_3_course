@@ -3,7 +3,7 @@ export default {
     name: 'intersection',
     // mounted  вызывается перед монтированием родительского компонента, к элементу которого привязана директива.
     mounted(el, binding) {// el it is dom-el when we put  this directive
-        console.log(el, binding);// via binding we can pass obj, fn, etc
+        // console.log(el, binding);// via binding we can pass obj, fn, etc
         // (000)this for intersection observer------------------
         // console.log(this.$refs.observer)// div за которым мы наблюдаем
         // Create watcher-object
