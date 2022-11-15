@@ -5,6 +5,7 @@
         <div class="navbar__btb">
             <my-button @click="$router.push(`/posts`)">Posts</my-button>
             <my-button @click="$router.push('/about')">About app</my-button>
+            <my-button @click="$router.push('/store')">Store</my-button>
         </div>
     </div>
 

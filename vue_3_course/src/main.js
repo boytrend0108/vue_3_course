@@ -1,5 +1,6 @@
 import { createApp } from 'vue' // 1.import createApp from vue
 import App from './App' //3.Import comp App.vue
+
 const app = createApp(App);
 
 //---Global registration UI 
@@ -14,7 +15,10 @@ directives.forEach(directive => {
     app.directive(directive.name, directive)// global registration of directivs
 });
 
-import router from './router/router';
+import router from '@/router/router';
+import store from '@/store';
+
 app
     .use(router)
+    .use(store)
     .mount('#app')// 2.create app and mount it in div #app

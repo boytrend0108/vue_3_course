@@ -29,7 +29,6 @@ import axios from 'axios'// for API
 
 
 export default {// data and methods stay here couse they'll be used in diferent components
-
     components: {
         PostForm, PostList // add components to script
     },
@@ -103,12 +102,11 @@ export default {// data and methods stay here couse they'll be used in diferent 
 
     },
     mounted() {
-        // this.fetchPosts();//download post from server
-
-
+        this.fetchPosts();//download post from server
 
     },
     computed: {//!!!!All computed function we can use as variable!!!(without ())
+        // THIS WE MOVED TO POSTMODULE.JS
         sortedPosts() {// sort posts
             // we deploy new array
             return [...this.posts]
@@ -120,8 +118,6 @@ export default {// data and methods stay here couse they'll be used in diferent 
                 post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
         }
     },
-
-
 }
 </script>
 

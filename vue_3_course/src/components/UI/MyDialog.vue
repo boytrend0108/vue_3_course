@@ -16,7 +16,7 @@ export default {
     name: 'my-dialog',// need to go to index.js and add this component
     mixins: [toggleMixin], // plug mixin in
     mounted() {
-        console.log('dialog ')
+        // console.log('dialog ')
     }
 }
 

@@ -13,7 +13,7 @@ export default {
     },
     // add for example
     mounted() { // don't forget to put "()"
-        console.log('mixin');
+        // console.log('mixin');
     }
 
 }

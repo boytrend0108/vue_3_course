@@ -7,7 +7,7 @@
         </div>
         <div style="margin-right: 10px;">
             <!-- to insert ${post.id} use `` not '' -->
-            <my-button @click="$router.push(`posts/${post.id}`)">Open</my-button>
+            <my-button @click="$router.push(`/posts/${post.id}`)">Open</my-button>
         </div>
         <div>
             <my-button @click="$emit('remove', post)">Delete</my-button>
