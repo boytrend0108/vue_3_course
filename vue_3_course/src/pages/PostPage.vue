@@ -103,7 +103,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
 
     },
     mounted() {
-        // this.fetchPosts();//download post from server
+        this.fetchPosts();//download post from server
 
 
 

@@ -1,7 +1,13 @@
 <template>
     <div>
         <!--Add component to html-->
-        <!-- <h1>{{ $store.state.likes }}</h1> -->
+        <h1>{{ $store.state.isAuth ? 'User is authorized' : "You need to login" }}</h1>
+        <h1>Likes: {{ $store.state.likes }}</h1>
+        <h2>DoubleLikes: {{ $store.getters.doubleLikes }}</h2>
+        <div>
+            <my-button @click="$store.commit('incrementLikes')">Like</my-button>
+            <my-button @click="$store.commit('decrementLikes')">Dislike</my-button>
+        </div>
         <h1>Post page Vuex</h1>
         <my-input v-focus v-model="searchQuery" placeholder="Seach..." />
         <div class="app__bnts">
