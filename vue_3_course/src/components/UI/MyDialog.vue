@@ -8,19 +8,15 @@
 </template>
 
 <script>
+import toggleMixin from '@/mixins/toggleMixin';
+import { onMounted } from 'vue';
+
 
 export default {
     name: 'my-dialog',// need to go to index.js and add this component
-    props: {
-        show: {
-            type: Boolean,
-            default: false
-        }
-    },
-    methods: {
-        hideDialog() {
-            this.$emit('update:show', false)// updata show in v-if="show"
-        }
+    mixins: [toggleMixin], // plug mixin in
+    mounted() {
+        console.log('dialog ')
     }
 }
 
