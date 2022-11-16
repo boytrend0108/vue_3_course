@@ -27,7 +27,7 @@ import PostList from '@/components/PostList.vue'
 import usePosts from '@/hooks/usePosts'
 import useSortedPost from '@/hooks/useSortedPosts'
 import useSortedAndSearchedPost from '@/hooks/useSortedAndSeachedPosts'
-import useCreatePost from '@/hooks/useCreatePost'
+import useDialogVisible from '@/hooks/useDialogVisible'
 
 export default {// data and methods stay here couse they'll be used in diferent components
     components: {
@@ -48,7 +48,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
         const { posts, totalPage, isPostLoading } = usePosts(5);// 5- it is 'limit'
         const { selectedSort, sortedPosts } = useSortedPost(posts)
         const { searchQuery, sortedAndSearchedPosts } = useSortedAndSearchedPost(sortedPosts)
-        const { dialogVisible, showDialogVisible } = useCreatePost()
+        const { dialogVisible, showDialogVisible } = useDialogVisible()
 
 
         return {// to make the function available in the template
