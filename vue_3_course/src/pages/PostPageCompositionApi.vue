@@ -4,7 +4,7 @@
         <h1>Post page</h1>
         <my-input v-focus v-model="searchQuery" placeholder="Seach..." />
         <div class="app__bnts">
-            <my-button style="margin: 15px 0">Create post</my-button>
+            <my-button style="margin: 15px 0" @click="showDialogVisible">Create post</my-button>
             <my-select v-model="selectedSort" :options="sortOptions"></my-select>
         </div>
         <!-- v-model connect show in MyDialog with dialogVisible in this page -->
@@ -27,6 +27,7 @@ import PostList from '@/components/PostList.vue'
 import usePosts from '@/hooks/usePosts'
 import useSortedPost from '@/hooks/useSortedPosts'
 import useSortedAndSearchedPost from '@/hooks/useSortedAndSeachedPosts'
+import useCreatePost from '@/hooks/useCreatePost'
 
 export default {// data and methods stay here couse they'll be used in diferent components
     components: {
@@ -34,7 +35,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
     },
     data() {
         return {
-            dialogVisible: false,
+            // dialogVisible: true,
             sortOptions: [// array for dropdown list(MySelect)
                 { value: 'title', name: '- by name' },
                 { value: 'body', name: '- by description' },
@@ -43,9 +44,12 @@ export default {// data and methods stay here couse they'll be used in diferent 
     },
 
     setup(props) {
+
         const { posts, totalPage, isPostLoading } = usePosts(5);// 5- it is 'limit'
         const { selectedSort, sortedPosts } = useSortedPost(posts)
         const { searchQuery, sortedAndSearchedPosts } = useSortedAndSearchedPost(sortedPosts)
+        const { dialogVisible, showDialogVisible } = useCreatePost()
+
 
         return {// to make the function available in the template
             posts,
@@ -54,9 +58,12 @@ export default {// data and methods stay here couse they'll be used in diferent 
             selectedSort,
             sortedPosts,
             searchQuery,
-            sortedAndSearchedPosts
+            sortedAndSearchedPosts,
+            dialogVisible,
+            showDialogVisible
         }
-    }
+    },
+
 }
 </script>
 
