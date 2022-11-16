@@ -8,16 +8,15 @@
 </template>
 
 <script>
+// -------For using Navbar in all pages---------
 import Navbar from '@/components/Navbar';
-
-export default{
-    components:{
+export default {
+    components: {
         Navbar
     }
 }
-
+//-----------------------------------------------
 </script>
-
 
 <style>
 * {
