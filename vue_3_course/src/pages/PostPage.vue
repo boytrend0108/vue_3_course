@@ -25,8 +25,7 @@
 // @- allias thet refers tu src
 import PostForm from '@/components/PostForm.vue'
 import PostList from '@/components/PostList.vue'
-import axios from 'axios'// for API
-
+import axios from 'axios'// for gettig data from API
 
 export default {// data and methods stay here couse they'll be used in diferent components
     components: {
@@ -50,7 +49,6 @@ export default {// data and methods stay here couse they'll be used in diferent 
             //-------
         }
     },
-
     methods: {
         createPost(post) {// without post don't work push
             this.posts.unshift(post);
@@ -103,7 +101,6 @@ export default {// data and methods stay here couse they'll be used in diferent 
     },
     mounted() {
         this.fetchPosts();//download post from server
-
     },
     computed: {//!!!!All computed function we can use as variable!!!(without ())
         // THIS WE MOVED TO POSTMODULE.JS

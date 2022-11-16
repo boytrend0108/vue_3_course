@@ -35,13 +35,13 @@ export const postModule = {
         setPosts(state, posts) {
             state.posts = posts
         },
-        setLoading(state, bool) {
+        setIsPostLoading(state, bool) {
             state.isPostLoading = bool
         },
-        setselectedSort(state, selectedSort) {
+        setSelectedSort(state, selectedSort) {
             state.selectedSort = selectedSort
         },
-        setsearchQuery(state, searchQuery) {
+        setSearchQuery(state, searchQuery) {
             state.searchQuery = searchQuery
         },
         setPage(state, page) {
@@ -54,7 +54,7 @@ export const postModule = {
     actions: {
         async fetchPosts({ state, commit }) {// more information https://vuex.vuejs.org/api/#actions
             try {
-                commit('setLoading', true)// this means :change setLoading to true
+                commit('setIsPostLoading', true)// this means :change 'setIsPostLoading' to true
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
                     params: { //-----for page rendering ...typicode.com/posts&_page=10&_limit= 5
                         // HERE WE CHANGE 'THIS' TO 'STATE'
@@ -68,7 +68,7 @@ export const postModule = {
             } catch (err) {
                 console.log(err);
             } finally {
-                commit('setLoading', false);//disappeare prelouder    
+                commit('setIsPostLoading', false);//disappeare prelouder    
             }
         },
         async loadMorePosts({ state, commit }) {
@@ -92,5 +92,5 @@ export const postModule = {
             }
         }
     },
-    namespaced: true
+    namespaced: true//!!!
 }

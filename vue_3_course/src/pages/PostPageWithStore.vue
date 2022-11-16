@@ -1,11 +1,11 @@
 <template>
-
     <div>
         <h1>Post page</h1>
-        <!-- <my-input v-focus v-model="searchQuery" placeholder="Seach..." /> -->
+        <my-input v-focus :model-value="searchQuery" @update:model-value="setSearchQuery" placeholder="Seach..." />
         <div class="app__bnts">
             <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
-            <!-- <my-select v-model="selectedSort" :options="sortOptions"></my-select> -->
+            <my-select :model-value="selectedSort" @update:model-value="setSelectedSort" :options="sortOptions">
+            </my-select>
         </div>
         <!-- v-model connect show in MyDialog with dialogVisible in this page -->
         <my-dialog v-model:show="dialogVisible">
@@ -24,7 +24,7 @@
 // @- allias thet refers tu src
 import PostForm from '@/components/PostForm.vue'
 import PostList from '@/components/PostList.vue'
-import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'// this is for mapping
 
 export default {// data and methods stay here couse they'll be used in diferent components
     components: {
@@ -36,13 +36,6 @@ export default {// data and methods stay here couse they'll be used in diferent 
         }
     },
     methods: {
-        ...mapMutations({
-            setPage: 'post/setPage'
-        }),
-        ...mapActions({
-            loadMorePosts: 'post/loadMorePosts',
-            fetchPosts: 'post/fetchPosts'
-        }),
         createPost(post) {// without post don't work push
             this.posts.unshift(post);
             this.dialogVisible = false; //hide dialog window 
@@ -53,6 +46,17 @@ export default {// data and methods stay here couse they'll be used in diferent 
         showDialog() {
             this.dialogVisible = true;
         },
+        // insted of using here func 'fetchPosts' and 'loadMorePosts' we use referencies to postModul
+        ...mapActions({// this need to use setPage and setSearchQuery in html
+            fetchPosts: 'post/fetchPosts',
+            loadMorePosts: 'post/loadMorePosts'
+        }),
+        ...mapMutations({// this need to use setPage and setSearchQuery in html
+            setPage: 'post/setPage',
+            setSearchQuery: 'post/setSearchQuery',// this is for search input
+            setSelectedSort: 'post/setSelectedSort'// thi is for sort
+        }),
+
     },
     mounted() {
         this.fetchPosts();//download post from server
