@@ -17,7 +17,6 @@ directives.forEach(directive => {
 
 import router from '@/router/router';
 import store from '@/store';
-
 app
     .use(router)
     .use(store)

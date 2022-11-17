@@ -1,6 +1,6 @@
 export default {
     name: 'focus',
-    mounted(el) {
+    mounted(el) {// when mount add focus 
         el.focus();
     }
 }

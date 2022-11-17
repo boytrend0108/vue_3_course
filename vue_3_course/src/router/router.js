@@ -34,8 +34,6 @@ const routes = [
     },
 ]
 
-
-
 const router = createRouter(
     {
         routes,

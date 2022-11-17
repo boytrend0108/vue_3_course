@@ -1,23 +1,23 @@
 <template>
-    <div class="dialog" v-if="show" @click="hideDialog">
-
+    <!-- The base block is stretched to the full width of the screen -->
+    <div 
+      class="dialog" 
+      v-if="show" 
+      @click="hideDialog"> 
         <!-- @click.stop means that click don't work with this div-->
-        <div @click.stop class="dialog__content">
-            <slot></slot>
-        </div>
+          <div 
+             @click.stop 
+             class="dialog__content">
+                  <slot></slot>
+          </div>
     </div>
 </template>
 
 <script>
 import toggleMixin from '@/mixins/toggleMixin';
-
 export default {
     name: 'my-dialog',// need to go to index.js and add this component
     mixins: [toggleMixin], // plug mixin in
-
-    mounted() {
-        // console.log('dialog ')
-    }
 }
 
 </script>

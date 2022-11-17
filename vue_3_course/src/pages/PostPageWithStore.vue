@@ -47,7 +47,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
             this.dialogVisible = true;
         },
         // insted of using here func 'fetchPosts' and 'loadMorePosts' we use referencies to postModul
-        ...mapActions({// this need to use setPage and setSearchQuery in html
+        ...mapActions({// this need to use fetchPosts and loadMorePosts in html
             fetchPosts: 'post/fetchPosts',
             loadMorePosts: 'post/loadMorePosts'
         }),
@@ -59,10 +59,10 @@ export default {// data and methods stay here couse they'll be used in diferent 
 
     },
     mounted() {
-        this.fetchPosts();//download post from server
+      
     },
     computed: {
-        ...mapState({
+        ...mapState({ // connect state from postModule
             posts: state => state.post.posts,
             isPostLoading: state => state.post.isPostLoading,
             selectedSort: state => state.post.selectedSort,
@@ -72,7 +72,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
             limit: state => state.post.limit,
             totalPage: state => state.post.totalPage
         }),
-        ...mapGetters({
+        ...mapGetters({ // connect getters from postMolule
             sortedPosts: 'post/sortedPosts',
             sortedAndSearchedPost: 'post/sortedAndSearchedPost'
         }),

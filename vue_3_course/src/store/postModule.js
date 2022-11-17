@@ -20,9 +20,8 @@ export const postModule = {
         // add state to functiom params
         sortedPosts(state) {// sort posts
             // we deploy new array and !!!! 'this' change to 'state'
-            return [...state.posts]
-                .sort((post1, post2) => post1[state.selectedSort]
-                    ?.localeCompare(post2[state.selectedSort]))
+            return [...state.posts].sort((post1, post2) => post1[state.selectedSort]
+                ?.localeCompare(post2[state.selectedSort]))
         },// in this getter we use first getter
         sortedAndSearchedPost(state, getters) {// filter posts
             // here we use getters instade this, couse we refers to first getter
