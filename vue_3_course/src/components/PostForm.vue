@@ -10,23 +10,25 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
             post: {// our post as object
                 title: '',
                 body: '',
-            }
+            },
         }
     },
     methods: {
         createPost() {
             this.post.id = Date.now(); // add post.id (current date)
-            this.$emit('create', this.post)
+            this.$emit('create', this.post);
             this.post = {
                 title: '',// clear input
                 body: '',
             }
+            this.$emit('hideDialog')// updata show in v-if="show"
         }
     },
 

@@ -10,7 +10,7 @@
         <!-- v-model connect show in MyDialog with dialogVisible in this page -->
         <my-dialog v-model:show="dialogVisible">
             <!--This use slot-->
-            <post-form />
+            <post-form @create="createPost" @hideDialog="hideDialog" />
         </my-dialog>
         <post-list :posts="sortedAndSearchedPosts" v-if="!isPostLoading" />
         <!--Preloader-->
@@ -28,6 +28,7 @@ import usePosts from '@/hooks/usePosts'
 import useSortedPost from '@/hooks/useSortedPosts'
 import useSortedAndSearchedPost from '@/hooks/useSortedAndSeachedPosts'
 import useDialogVisible from '@/hooks/useDialogVisible'
+import useCreatePost from '@/hooks/useCreatePost'
 
 export default {// data and methods stay here couse they'll be used in diferent components
     components: {
@@ -35,7 +36,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
     },
     data() {
         return {
-            // dialogVisible: true,
+            dialogVisible: false,
             sortOptions: [// array for dropdown list(MySelect)
                 { value: 'title', name: '- by name' },
                 { value: 'body', name: '- by description' },
@@ -44,12 +45,11 @@ export default {// data and methods stay here couse they'll be used in diferent 
     },
 
     setup(props) {
-
         const { posts, totalPage, isPostLoading } = usePosts(5);// 5- it is 'limit'
         const { selectedSort, sortedPosts } = useSortedPost(posts)
         const { searchQuery, sortedAndSearchedPosts } = useSortedAndSearchedPost(sortedPosts)
         const { dialogVisible, showDialogVisible } = useDialogVisible()
-
+        const { createPost } = useCreatePost(posts)
 
         return {// to make the function available in the template
             posts,
@@ -60,9 +60,15 @@ export default {// data and methods stay here couse they'll be used in diferent 
             searchQuery,
             sortedAndSearchedPosts,
             dialogVisible,
-            showDialogVisible
+            showDialogVisible,
+            createPost,
         }
     },
+    methods: {
+        hideDialog() {
+            this.dialogVisible = false
+        }
+    }
 
 }
 </script>

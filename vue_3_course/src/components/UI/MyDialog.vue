@@ -1,5 +1,6 @@
 <template>
     <div class="dialog" v-if="show" @click="hideDialog">
+
         <!-- @click.stop means that click don't work with this div-->
         <div @click.stop class="dialog__content">
             <slot></slot>
@@ -9,12 +10,11 @@
 
 <script>
 import toggleMixin from '@/mixins/toggleMixin';
-import { onMounted } from 'vue';
-
 
 export default {
     name: 'my-dialog',// need to go to index.js and add this component
     mixins: [toggleMixin], // plug mixin in
+
     mounted() {
         // console.log('dialog ')
     }

@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 export default function useSortedPosts(posts) {
+
     const selectedSort = ref('')//ref принимает аргумент и возвращает его обёрнутым в объект со свойством value,
     const sortedPosts = computed(() => {
         // we deploy new array
